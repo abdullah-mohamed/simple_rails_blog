@@ -1,4 +1,30 @@
 // $navbar-default-bg: #8405ce; // somethings must be added before import to override it
 //@import "bootstrap-sprockets";
 //@import "bootstrap";
+
+footer{
+    margin-top: 45px;
+    padding-top: 45px;
+    border-top: 1px solid #eaeaea;
+    color: #777;
+}
+
+footer a:hover {
+    color: #222;
+}
+
+footer small {
+    float: left;
+}
+
+footer ul{
+    list-style: none;
+    float: right;
+}  
+
+footer ul li {
+    float: left;
+    margin-left: 15px;
+}
+
 @import "bootstrap/scss/bootstrap"
