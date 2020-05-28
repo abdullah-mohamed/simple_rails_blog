@@ -37,15 +37,7 @@ $colHighlight: #f5f6f7;
   .navbar-link {
     color: $colDefault;
     &:hover {
-      color: $colHighlight; }}}
-/*@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu {
-    > li > a {
-      color: $colDefault;
-      &:hover, &:focus {
-        color: $colHighlight; }}
-    > .active {
-      > a, > a:hover, > a:focus, {
-        color: $colHighlight;
-        background-color: $bgHighlight; }}}
-}*/
+      color: $colHighlight; 
+    }
+  }
+}
