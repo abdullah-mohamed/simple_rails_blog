@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_085309) do
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "commentor"
+    t.string "commenter"
     t.text "body"
     t.bigint "article_id", null: false
     t.datetime "created_at", precision: 6, null: false

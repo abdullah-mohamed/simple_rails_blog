@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+    # Uupdate: before_action: check_login
+    # Uupdate : before_edit: check auth
+    # Uupdate : before_delete: check auth
 
     def index
         @articles = Article.all
@@ -45,6 +48,8 @@ class ArticlesController < ApplicationController
 
 private
     def article_params
+        # Uupdate : require user logged in
+        # params.require(:user).permit(:logged_in)
         params.require(:article).permit(:title, :text)
     end
 end
