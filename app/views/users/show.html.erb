@@ -10,5 +10,28 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong> <%= @user.username %> Articles</strong>
+</p>
+<% @user.articles.each do |article| %>
+  <div class="row">
+    <div class="col-xs-8 col-md-offset-2">
+      <div class="well well-lg">
+        <div class="article-title">
+          <strong> <%= article.title %> </strong>
+        </div>
+        <div class="article-body">
+          <%= truncate(article.text, length: 100) %> <br>
+          <div class="article-meta-details">
+            <small>
+              Created at :<%= time_ago_in_words(article.created_at) %> ago
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
