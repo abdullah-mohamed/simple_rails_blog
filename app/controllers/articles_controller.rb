@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        @articel.user = User.first          # MUST BE DELETED
+        @articel.user = User.first          # MUST BE UPDATED
         if @article.save
             redirect_to @article
         else
