@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     def create
         require_user
         @article = Article.new(article_params)
-        authorize_user
+        #authorize_user
         @article.user = current_user
         if @article.save
             redirect_to @article
@@ -59,7 +59,7 @@ private
     end
 
     def authorize_user
-        if current_user != @article.user
+        if current_user != @article.user and !current_user.admin?
             flash[:danger] = "You aren't authorized to perform this action"
             redirect_to root_path
         end

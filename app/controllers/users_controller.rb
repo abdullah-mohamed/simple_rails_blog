@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    debugger
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -78,7 +77,7 @@ class UsersController < ApplicationController
     end
 
     def authorize_user
-      if current_user != @user
+      if current_user != @user and !current_user.admin?
           flash[:danger] = "You aren't authorized to perform this action"
           redirect_to root_path
       end

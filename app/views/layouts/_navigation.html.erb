@@ -26,7 +26,11 @@
             <% if logged_in? %>
               <li> <%= link_to "New Article", new_article_path %> </a></li>
               <li> <%= link_to 'log out', logout_path, method: :delete%></li>
-              <li> <%= link_to current_user.username, user_path(current_user) %> </a></li>
+              <% if current_user.admin? %>
+                <li> <%= link_to "Admin", user_path(current_user) %> </a></li>
+              <% else %>
+                <li> <%= link_to current_user.username, user_path(current_user) %> </a></li>
+              <% end %>
             <% else %>
               <li> <%= link_to 'log in', login_path %></li>
               <li> <%= link_to 'sign up', signup_path %></li>
