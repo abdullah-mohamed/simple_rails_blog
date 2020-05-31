@@ -1,7 +1,5 @@
 class ArticlesController < ApplicationController
-    # Uupdate: before_action: check_login
-    # Uupdate : before_edit: check auth
-    # Uupdate : before_delete: check auth
+    before_action: check_login
 
     def index
         @articles = Article.paginate(page: params[:page], per_page: 2)
