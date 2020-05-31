@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show, :new, :create]
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /users
@@ -27,10 +27,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    debugger
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id 
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     end
 
     def create
-        #debugger
         user = User.find_by(email: params[:session][:email].downcase)
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id # save user id to browser session ID which is supported by cookies
@@ -15,7 +14,6 @@ class SessionsController < ApplicationController
             flash.now[:error] = "Wrong credentials!"
             render 'new'
         end
-
     end
 
     def destroy
