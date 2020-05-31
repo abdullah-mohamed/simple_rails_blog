@@ -2,6 +2,10 @@
 
 <h1>Users</h1>
 
+<div align="center">
+    <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -24,6 +28,9 @@
   </tbody>
 </table>
 
+<div align="center">
+    <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+</div>
 <br>
 
 <%= link_to 'New User', new_user_path %>

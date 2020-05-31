@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'will_paginate', '~>3.1.0'
+gem 'will_paginate-bootstrap', '~> 1.0.0'
+
 # bootstrap sass
 #gem 'bootstrap-sass', '~> 3.4.1'
 #gem 'sassc-rails', '>= 2.1.0'

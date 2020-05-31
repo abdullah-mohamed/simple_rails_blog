@@ -4,6 +4,10 @@
 <%= link_to 'New article', '/articles/new' %>
 <br>
 
+<div align="center">
+    <%= will_paginate @articles %>
+</div>
+
 <table>
     <tr>
         <th> Title </th>
@@ -26,3 +30,7 @@
         </tr>
     <% end %>
 </table>
+
+<div align="center">
+    <%= will_paginate @articles %>
+</div>

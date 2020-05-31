@@ -13,7 +13,11 @@
 <p>
   <strong> <%= @user.username %> Articles</strong>
 </p>
-<% @user.articles.each do |article| %>
+
+<div align="center">
+ <%= will_paginate @user_articles %>
+</div>
+<% @user_articles.each do |article| %>
   <div class="row">
     <div class="col-xs-8 col-md-offset-2">
       <div class="well well-lg">
@@ -32,6 +36,9 @@
     </div>
   </div>
 <% end %>
+<div align="center">
+ <%= will_paginate @user_articles %>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
