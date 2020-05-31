@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -71,5 +73,12 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:username, :email, :password)
+    end
+
+    def authorize_user
+      if current_user != @user
+          flash[:danger] = "You aren't authorized to perform this action"
+          redirect_to root_path
+      end
     end
 end

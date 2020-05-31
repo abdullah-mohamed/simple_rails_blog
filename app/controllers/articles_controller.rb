@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
         require_user
         @article = Article.new(article_params)
         authorize_user
-        @article.user = User.first          # MUST BE UPDATED
+        @article.user = current_user
         if @article.save
             redirect_to @article
         else
