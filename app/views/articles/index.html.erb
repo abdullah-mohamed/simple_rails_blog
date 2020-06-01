@@ -1,24 +1,38 @@
 
 <h1>Listing Articles</h1>
 
-<%= link_to 'New article', '/articles/new' %>
+
 <br>
+
+<div align="center">
+    <%= will_paginate @articles %>
+</div>
 
 <table>
     <tr>
         <th> Title </th>
         <th> Text </th>
+        <th> Writer </th>
+        <th> Date </th>
         <th colspan="3"> Link </th>
     </tr>
     <% @articles.each do |article| %>
         <tr>
             <td> <%= article.title %> </td>
             <td> <%= article.text %> </td>
+            <td> <%= article.user.username %> </td>
+            <td> <%= time_ago_in_words(article.created_at) %> ago </td>
             <td> <%= link_to 'Show', article_path(article) %> </td>
-            <td> <%= link_to 'Edit', edit_article_path(article) %> </td>
-            <td> <%= link_to 'Destroy', article_path(article),
-                                       method: :delete,
-                                       data: { confirm: "Are you sure?" } %> </td>
-        </tr>
+            <% if (current_user.admin? or current_user == article.user ) %>
+                <td> <%= link_to 'Edit', edit_article_path(article) %> </td>
+                <td> <%= link_to 'Destroy', article_path(article),
+                                        method: :delete,
+                                        data: { confirm: "Are you sure?" } %> </td>
+            <% end %>
+            </tr>
     <% end %>
 </table>
+
+<div align="center">
+    <%= will_paginate @articles %>
+</div>

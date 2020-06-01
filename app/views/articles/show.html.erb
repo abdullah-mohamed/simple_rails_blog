@@ -11,8 +11,12 @@
 <h2>Comments</h2>
 <%= render @article.comments %>
 
-<p> Add comment: </p>
-<%= render 'comments/form' %>
+<% if logged_in? %>
+    <p> Add comment: </p>
+    <%= render 'comments/form' %>
+<% end %>
 
-<%= link_to 'Edit', edit_article_path(@article) %>
-<%= link_to 'Back', articles_path %>
+<% if current_user == @article.user || current_user.admin? %>
+    <%= link_to 'Edit', edit_article_path(@article) %>
+    <%= link_to 'Back', articles_path %>
+<% end %>

@@ -1,15 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show, :new, :create]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 2)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user_articles = @user.articles.paginate(page: params[:page], per_page: 2)
   end
 
   # GET /users/new
@@ -28,6 +31,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id 
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -69,6 +73,13 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email)
+      params.require(:user).permit(:username, :email, :password)
+    end
+
+    def authorize_user
+      if current_user != @user and !current_user.admin?
+          flash[:danger] = "You aren't authorized to perform this action"
+          redirect_to root_path
+      end
     end
 end

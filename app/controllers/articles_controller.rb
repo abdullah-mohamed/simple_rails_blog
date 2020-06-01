@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
-    # Uupdate: before_action: check_login
-    # Uupdate : before_edit: check auth
-    # Uupdate : before_delete: check auth
+    # before_action :set_user, only: [:show, :edit, :update, :destroy]
+    # before_action :require_user, except: [:index, :show]
 
+    
     def index
-        @articles = Article.all
+        @articles = Article.paginate(page: params[:page], per_page: 2)
     end
 
     def show
@@ -12,16 +12,21 @@ class ArticlesController < ApplicationController
     end
 
     def new
+        require_user
         @article = Article.new
     end
 
     def edit
+        require_user
         @article = Article.find(params[:id])
+        authorize_user
     end
 
     def create
+        require_user
         @article = Article.new(article_params)
-        @articel.user = User.first          # MUST BE DELETED
+        #authorize_user
+        @article.user = current_user
         if @article.save
             redirect_to @article
         else
@@ -30,8 +35,9 @@ class ArticlesController < ApplicationController
     end
 
     def update
+        require_user
         @article = Article.find(params[:id])
-
+        authorize_user
         if(@article.update(article_params))
             redirect_to @article
         else
@@ -40,16 +46,22 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
+        require_user
         @article = Article.find(params[:id])
+        authorize_user
         @article.destroy
-
         redirect_to articles_path
     end
 
 private
     def article_params
-        # Uupdate : require user logged in
-        # params.require(:user).permit(:logged_in)
         params.require(:article).permit(:title, :text)
+    end
+
+    def authorize_user
+        if current_user != @article.user and !current_user.admin?
+            flash[:danger] = "You aren't authorized to perform this action"
+            redirect_to root_path
+        end
     end
 end
