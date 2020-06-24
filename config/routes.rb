@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
-
+  resources :categories, except: [:destroy]
   #get 'about', to: 'pages#about'
 
   get 'signup', to: "users#new"
