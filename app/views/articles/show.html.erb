@@ -8,6 +8,17 @@
 <%= @article.text %>
 </p>
 
+<p>
+    <strong>Categories:</strong>
+    <% if @article.categories %>
+        <ul>
+            <% @article.categories.each do |category| %>
+                <li> category </li>
+            <% end %>
+        </ul>
+    <% end %>
+</p>
+
 <h2>Comments</h2>
 <%= render @article.comments %>
 

@@ -9,6 +9,7 @@
       </button>
       <a class="navbar-brand" href="/">SIMPLE BLOG</a>
       <a href="/articles" style = "color: white; display: inline;">ARTICLES <span class="sr-only">(current)</span></a>
+      <a href="/categories" style = "color: white; display: inline;">Categories <span class="sr-only">(current)</span></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,6 +23,7 @@
               <li> <%= link_to "New Article", new_article_path %> </a></li>
               <li> <%= link_to 'log out', logout_path, method: :delete%></li>
               <% if current_user.admin? %>
+                <li> <%= link_to "New Category", new_category_path %> </li>
                 <li> <%= link_to "Admin", user_path(current_user) %> </a></li>
               <% else %>
                 <li> <%= link_to current_user.username, user_path(current_user) %> </a></li>
